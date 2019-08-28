@@ -30,4 +30,29 @@ public class TelloCmdRs {
         String ret = telloClientService.cmd(cmd);
         return Response.ok(new CmdResponse(cmd, ret)).build();
     }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/ccw")
+    public Response counterClockWise(
+            @Min(message = "the rasdius in degrees, minimum 1", value = 1)
+            @Max(message = "the radius in degrees, maximum 3600", value = 3600)
+            @DefaultValue("100")
+            @QueryParam("degrees") int degrees) throws Exception {
+        System.out.println(degrees);
+        String cmd = TelloCmd.CCW.cmd("" + degrees);
+        String ret = telloClientService.cmd(cmd);
+        return Response.ok(new CmdResponse(cmd, ret)).build();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/command")
+    public Response command() throws Exception {
+        String cmd = TelloCmd.COMMAND.cmd("");
+        String ret = telloClientService.cmd(cmd);
+        return Response.ok(new CmdResponse(cmd, ret)).build();
+    }
+
+    
 }
