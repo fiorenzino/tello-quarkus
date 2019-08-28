@@ -37,7 +37,7 @@ public enum TelloCmd {
 
 
     //SET CMD
-    SET_WIFI("speed", "Command to set the speed.");
+    SET_SPEED("speed", "Command to set the speed.");
 
 
     public final String cmd;

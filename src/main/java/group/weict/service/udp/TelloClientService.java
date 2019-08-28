@@ -1,13 +1,19 @@
 package group.weict.service.udp;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
-import java.io.IOException;
-import java.net.*;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 
 @ApplicationScoped
 public class TelloClientService {
+
+    private static final Logger logger = LoggerFactory.getLogger(TelloClientService.class);
+
 
     @ConfigProperty(name = "tello.ipaddress", defaultValue = "192.168.10.1")
     String ipaddress;
