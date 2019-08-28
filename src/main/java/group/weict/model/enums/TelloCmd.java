@@ -19,9 +19,18 @@ public enum TelloCmd {
      * Command to make the drone rotate in a clockwise direction by a specified amount of degrees.
      */
     CW("cw"),
-
-
-    ;
+    /**
+     * Command to make the drone descend by a specified distance.
+     */
+    DOWN("down"),
+    /**
+     * Command to stop all the motors immediately.
+     */
+    EMERGENCY("emergency"),
+    /**
+     * Command to make the drone flip in a specified direction.
+     */
+    FLIP("flip");
 
     private final String cmd;
 
