@@ -3,8 +3,8 @@ package group.weict.model.enums;
 public enum TelloCmd {
 
 
-    BACK("back", "Command to make the drone fly backwards by a specified distance."),
-    CCW("ccw", "Command to make the drone rotate in a counter-clockwise direction by a specified amount of degrees."),
+    BACK("back", "Command to make the drone fly backwards by a specified distance: the distance in cm, minimum 20, maximum 500"),
+    CCW("ccw", "Command to make the drone rotate in a counter-clockwise direction by a specified amount of degrees: the radius in degrees, minimum 1,maximum 360"),
     COMMAND("command", "Command to make the drone enter SDK mode. This command has to be executed before executing any of the other commands."),
     CW("cw", "Command to make the drone rotate in a clockwise direction by a specified amount of degrees."),
     DOWN("down", "Command to make the drone descend by a specified distance."),
@@ -40,8 +40,8 @@ public enum TelloCmd {
     SET_WIFI("speed", "Command to set the speed.");
 
 
-    private final String cmd;
-    private final String help;
+    public final String cmd;
+    public final String help;
 
     public static String SPACE = " ";
 
