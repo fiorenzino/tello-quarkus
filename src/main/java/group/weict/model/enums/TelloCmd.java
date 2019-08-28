@@ -54,4 +54,8 @@ public enum TelloCmd {
         return this.name() + SPACE + options;
     }
 
+    public String cmd() {
+        return this.name();
+    }
+
 }
