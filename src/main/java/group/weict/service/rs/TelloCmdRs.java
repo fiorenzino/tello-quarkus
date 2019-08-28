@@ -33,11 +33,82 @@ public class TelloCmdRs {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Path("/forward")
+    public Response forward(
+            @Min(message = "the distance in cm, minimum 20", value = 20)
+            @Max(message = "the distance in cm maximum 500", value = 500)
+            @DefaultValue("20")
+            @QueryParam("distanceInCm") int distanceInCm) throws Exception {
+        System.out.println(distanceInCm);
+        String cmd = TelloCmd.FORWARD.cmd("" + distanceInCm);
+        String ret = telloClientService.cmd(cmd);
+        return Response.ok(new CmdResponse(cmd, ret)).build();
+    }
+
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/left")
+    public Response left(
+            @Min(message = "the distance in cm, minimum 20", value = 20)
+            @Max(message = "the distance in cm maximum 500", value = 500)
+            @DefaultValue("20")
+            @QueryParam("distanceInCm") int distanceInCm) throws Exception {
+        System.out.println(distanceInCm);
+        String cmd = TelloCmd.LEFT.cmd("" + distanceInCm);
+        String ret = telloClientService.cmd(cmd);
+        return Response.ok(new CmdResponse(cmd, ret)).build();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/right")
+    public Response right(
+            @Min(message = "the distance in cm, minimum 20", value = 20)
+            @Max(message = "the distance in cm maximum 500", value = 500)
+            @DefaultValue("20")
+            @QueryParam("distanceInCm") int distanceInCm) throws Exception {
+        System.out.println(distanceInCm);
+        String cmd = TelloCmd.RIGHT.cmd("" + distanceInCm);
+        String ret = telloClientService.cmd(cmd);
+        return Response.ok(new CmdResponse(cmd, ret)).build();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/down")
+    public Response down(
+            @Min(message = "the distance in cm, minimum 20", value = 20)
+            @Max(message = "the distance in cm maximum 500", value = 500)
+            @DefaultValue("20")
+            @QueryParam("distanceInCm") int distanceInCm) throws Exception {
+        System.out.println(distanceInCm);
+        String cmd = TelloCmd.DOWN.cmd("" + distanceInCm);
+        String ret = telloClientService.cmd(cmd);
+        return Response.ok(new CmdResponse(cmd, ret)).build();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/up")
+    public Response up(
+            @Min(message = "the distance in cm, minimum 20", value = 20)
+            @Max(message = "the distance in cm maximum 500", value = 500)
+            @DefaultValue("20")
+            @QueryParam("distanceInCm") int distanceInCm) throws Exception {
+        System.out.println(distanceInCm);
+        String cmd = TelloCmd.UP.cmd("" + distanceInCm);
+        String ret = telloClientService.cmd(cmd);
+        return Response.ok(new CmdResponse(cmd, ret)).build();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/ccw")
     public Response counterClockWise(
             @Min(message = "the rasdius in degrees, minimum 1", value = 1)
-            @Max(message = "the radius in degrees, maximum 3600", value = 3600)
-            @DefaultValue("100")
+            @Max(message = "the radius in degrees, maximum 360", value = 360)
+            @DefaultValue("180")
             @QueryParam("degrees") int degrees) throws Exception {
         System.out.println(degrees);
         String cmd = TelloCmd.CCW.cmd("" + degrees);
@@ -59,8 +130,8 @@ public class TelloCmdRs {
     @Path("/cw")
     public Response clockWise(
             @Min(message = "the rasdius in degrees, minimum 1", value = 1)
-            @Max(message = "the radius in degrees, maximum 3600", value = 3600)
-            @DefaultValue("100")
+            @Max(message = "the radius in degrees, maximum 3600", value = 360)
+            @DefaultValue("180")
             @QueryParam("degrees")
                     int degrees) throws Exception {
         System.out.println(degrees);
@@ -69,19 +140,6 @@ public class TelloCmdRs {
         return Response.ok(new CmdResponse(cmd, ret)).build();
     }
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/down")
-    public Response down(
-            @Min(message = "the distance in cm, minimum 20", value = 20)
-            @Max(message = "the distance in cm maximum 500", value = 500)
-            @DefaultValue("20")
-            @QueryParam("distanceInCm") int distanceInCm) throws Exception {
-        System.out.println(distanceInCm);
-        String cmd = TelloCmd.DOWN.cmd("" + distanceInCm);
-        String ret = telloClientService.cmd(cmd);
-        return Response.ok(new CmdResponse(cmd, ret)).build();
-    }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
