@@ -3,8 +3,8 @@ package group.weict.service.udp;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.context.ApplicationScoped;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
+import java.io.IOException;
+import java.net.*;
 
 @ApplicationScoped
 public class ClientService {
@@ -19,15 +19,23 @@ public class ClientService {
     private InetAddress inetAddress;
 
 
-    public String start() {
-        return null;
+    public void start() throws Exception {
+        datagramSocket = new DatagramSocket();
+        inetAddress = InetAddress.getByName(ipaddress);
     }
 
-    public String cmd() {
-        return null;
+    public String cmd(String message) throws IOException {
+        final byte[] buffer = message.getBytes();
+        DatagramPacket packet = new DatagramPacket(buffer, buffer.length, inetAddress, port);
+        datagramSocket.send(packet);
+        packet = new DatagramPacket(buffer, buffer.length);
+        datagramSocket.receive(packet);
+        return new String(packet.getData(), 0, packet.getLength());
     }
 
-    public String stop() {
-        return null;
+    public void stop() throws Exception {
+        if (datagramSocket != null && !datagramSocket.isClosed()) {
+            datagramSocket.close();
+        }
     }
 }
