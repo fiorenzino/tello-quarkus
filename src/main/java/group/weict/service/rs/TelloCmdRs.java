@@ -2,7 +2,7 @@ package group.weict.service.rs;
 
 import group.weict.model.enums.TelloCmd;
 import group.weict.model.pojo.CmdResponse;
-import group.weict.service.udp.ClientService;
+import group.weict.service.udp.TelloClientService;
 
 import javax.inject.Inject;
 import javax.validation.constraints.Max;
@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 public class TelloCmdRs {
 
     @Inject
-    ClientService clientService;
+    TelloClientService telloClientService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -27,7 +27,7 @@ public class TelloCmdRs {
             @QueryParam("distanceInCm") int distanceInCm) throws Exception {
         System.out.println(distanceInCm);
         String cmd = TelloCmd.BACK.cmd("" + distanceInCm);
-        String ret = clientService.cmd(cmd);
+        String ret = telloClientService.cmd(cmd);
         return Response.ok(new CmdResponse(cmd, ret)).build();
     }
 }

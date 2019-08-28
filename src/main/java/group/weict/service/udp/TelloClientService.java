@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.*;
 
 @ApplicationScoped
-public class ClientService {
+public class TelloClientService {
 
     @ConfigProperty(name = "tello.ipaddress", defaultValue = "192.168.10.1")
     String ipaddress;
