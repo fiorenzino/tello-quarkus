@@ -24,13 +24,20 @@ public class TelloClientService {
         inetAddress = InetAddress.getByName(ipaddress);
     }
 
-    public String cmd(String message) throws IOException {
+    public String cmd(String message) throws Exception {
+        if (!isStarted()) {
+            throw new Exception(" the server id not started!");
+        }
         final byte[] buffer = message.getBytes();
         DatagramPacket packet = new DatagramPacket(buffer, buffer.length, inetAddress, port);
         datagramSocket.send(packet);
         packet = new DatagramPacket(buffer, buffer.length);
         datagramSocket.receive(packet);
         return new String(packet.getData(), 0, packet.getLength());
+    }
+
+    public boolean isStarted() {
+        return datagramSocket != null;
     }
 
     public void stop() throws Exception {
