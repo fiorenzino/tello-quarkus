@@ -2,7 +2,6 @@ package group.weict.service.udp;
 
 import io.quarkus.runtime.ShutdownEvent;
 import io.quarkus.runtime.StartupEvent;
-import io.quarkus.scheduler.Scheduled;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +39,7 @@ public class TelloStateService {
         closeSocket();
     }
 
-    @Scheduled(every = "1s")
+//    @Scheduled(every = "1s")
     private void execute() {
         if (!running) {
             return;
