@@ -11,4 +11,4 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image
-      run: docker build . --file src/main/docker/Dockerfile.jvm --tag tello-quarkus:$(date +%s)
+      run: docker build -f src/main/docker/Dockerfile.multistage -t tello-quarkus:$(date +%s) .
