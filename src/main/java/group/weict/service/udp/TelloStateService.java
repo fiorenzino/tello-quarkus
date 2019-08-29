@@ -31,17 +31,17 @@ public class TelloStateService {
 
     void onStart(@Observes StartupEvent startupEvent) {
         logger.info("The TelloStateService is starting...");
-        start();
+        up();
     }
 
     void onStop(@Observes ShutdownEvent shutdownEvent) {
         logger.info("The TelloStateService is stopping...");
-        stop();
-        close();
+        down();
+        closeSocket();
     }
 
     @Scheduled(every = "1s")
-    private void run() {
+    private void execute() {
         if (!running) {
             return;
         }
@@ -61,7 +61,7 @@ public class TelloStateService {
 
     }
 
-    public void start() {
+    public void up() {
         try {
             datagramSocket = new DatagramSocket(this.port);
         } catch (SocketException e) {
@@ -69,12 +69,12 @@ public class TelloStateService {
         }
     }
 
-    public void stop() {
+    public void down() {
         this.running = false;
     }
 
 
-    public void close() {
+    public void closeSocket() {
 
         if (datagramSocket != null && !datagramSocket.isClosed()) {
             datagramSocket.close();

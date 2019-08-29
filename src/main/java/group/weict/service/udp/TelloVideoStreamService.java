@@ -29,17 +29,17 @@ public class TelloVideoStreamService {
 
     void onStart(@Observes StartupEvent startupEvent) {
         logger.info("TelloVideoStreamService is starting...");
-        start();
+        up();
     }
 
     void onStop(@Observes ShutdownEvent shutdownEvent) {
         logger.info("TelloVideoStreamService is stopping...");
-        stop();
-        close();
+        down();
+        closeSocket();
     }
 
     @Scheduled(every = "1s")
-    private void run() {
+    private void execute() {
         if (!running) {
             return;
         }
@@ -59,7 +59,7 @@ public class TelloVideoStreamService {
 
     }
 
-    public void start() {
+    public void up() {
         try {
             datagramSocket = new DatagramSocket(this.port);
             this.running = true;
@@ -68,12 +68,12 @@ public class TelloVideoStreamService {
         }
     }
 
-    public void stop() {
+    public void down() {
         this.running = false;
     }
 
 
-    public void close() {
+    public void closeSocket() {
 
         if (datagramSocket != null && !datagramSocket.isClosed()) {
             datagramSocket.close();
